@@ -1,3 +1,4 @@
 *.jtl
 jmeter.log
 output/
+results.csv
