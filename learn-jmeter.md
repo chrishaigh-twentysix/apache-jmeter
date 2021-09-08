@@ -43,3 +43,22 @@ Useful parameters: -
 * `Template ($i$ where i is capturing group number, starts at 1):` e.g. `$1$`
 * `Match No. (0 for Random):` which capture group to match (use `-1` for all)
 * `Default Value:` when no match found
+
+## JSON Extractor
+
+* enables the user to extract data from JSON responses using [JsonPath](https://github.com/json-path/JsonPath) syntax
+* must be a child of a **HTTP Sampler**
+
+Useful parameters: -
+
+* `Name of created variable:` variable to store extracted data
+* `JSON Path expressions:` expressions from which to extract data
+* `Match No. (0 for Random):` which capture group to match (use `-1` for all)
+* `Compute concatenation var (suffix _ALL):` check to concatenate all results together into an `xxx_ALL` variable
+* `Default Values:` when no match found
+
+Usage example
+1. Create an order via API HTTP request
+2. Capture order ID using **JSON Extractor**
+3. Delete order via API HTTP request using captured order ID
+
