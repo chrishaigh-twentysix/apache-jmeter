@@ -31,3 +31,15 @@
 * easier to use than the HTML Link Parser and more efficient
 * extract values from the response
 * can carry over / modify parameters from previous **HTTP Request** response, e.g. `jsessionId`.
+
+## Regular Expression Extractor
+
+* allows the user to extract values from a server response using a Perl-type regular expression
+
+Useful parameters: -
+
+* `Name of created variable:` variable to store extracted data
+* `Regular Expression:` expression to extract data
+* `Template ($i$ where i is capturing group number, starts at 1):` e.g. `$1$`
+* `Match No. (0 for Random):` which capture group to match (use `-1` for all)
+* `Default Value:` when no match found
