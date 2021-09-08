@@ -2,5 +2,5 @@
 
 ## CSV Data Set Config
 
-* help inject multiple sets of data
+* help inject multiple sets of data to the request
 * 
