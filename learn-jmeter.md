@@ -62,3 +62,16 @@ Usage example
 2. Capture order ID using **JSON Extractor**
 3. Delete order via API HTTP request using captured order ID
 
+## JSON JMESPath Extractor
+
+* allows the user to extract values from structured responses - XML or (X)HTML - using JMESPath query language
+
+* [**J**SON **M**atching **E**xpre**s**sion **P**aths](https://jmespath.org)
+* only one JMESPath expression can be entered at any one time
+
+Useful parameters: -
+
+* `Name of created variable:` variable to store extracted data
+* `JMESPath expressions:` expressions from which to extract data
+* `Match No. (0 for Random):` which capture group to match (use `-1` for all)
+* `Default Values:` when no match found
