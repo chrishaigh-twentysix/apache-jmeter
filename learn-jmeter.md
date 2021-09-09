@@ -84,3 +84,6 @@ Useful parameters: -
     * JSoup (default)
     * Jodd-Lagarto (CSSelly)
 
+## Boundary Extractor
+
+* allows the user to extract values from a server response using the left and right boundaries.
