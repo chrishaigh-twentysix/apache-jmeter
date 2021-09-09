@@ -87,3 +87,16 @@ Useful parameters: -
 ## Boundary Extractor
 
 * allows the user to extract values from a server response using the left and right boundaries.
+
+## XPath2 Extractor
+
+* allows the user to extract value(s) from a structured response - XML or (X)HTML - using XPath2 query language.
+
+Useful parameters: -
+
+* `Name of created variable:` variable to store extracted data
+* `XPath query:` XPath query expression from which to extract data
+* `Match No. (0 for Random):` which capture group to match (use `-1` for all)
+* `Default Value:` when no match found
+* `Namespaces aliases list (prefix=full namespace, 1 per line):` 
+* `Return entire XPath fragment instead of text content?` 
