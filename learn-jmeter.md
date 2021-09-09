@@ -75,3 +75,12 @@ Useful parameters: -
 * `JMESPath expressions:` expressions from which to extract data
 * `Match No. (0 for Random):` which capture group to match (use `-1` for all)
 * `Default Values:` when no match found
+
+## CSS Selector Extractor
+
+* allows tht user to extract values from a server HTML response using a CSS Selector syntax.
+
+* Uses CSS/jQuery-based syntax
+    * JSoup (default)
+    * Jodd-Lagarto (CSSelly)
+
