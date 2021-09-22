@@ -139,3 +139,46 @@ Plugins
 
 * clears queues at test start and stop
 
+## Timers
+
+* aim is to mimic a real-world scenario.
+* injects delays (think time) into tests.
+* in JMeter, timers are processed **before** each sampler in the scope
+
+e.g.
+
+* `Test Plan`
+  * `Thread Group`
+    * `Request 1`
+    * `Request 2`
+    * `Uniform Random Timer`
+    * `View Results Tree`
+
+Order of execution: -
+
+1. `Uniform Random Timer`
+2. `Request 1`
+3. `Uniform Random Timer`
+4. `Request 2`
+
+### Timers in Config
+
+You can update the timer factor in config by changing this config variable: `timer.factor`
+
+1. Open `jmeter.properties` and copy out the commented out section called `Think Time configuration` into `user.properties`
+
+2. Uncomment the `timer.factor` variable and set this to the desired factor.  All timings will be multiplied by this value
+
+3. e.g. `timer.factor=2.0f` will effectively double all timer delay values.
+
+## Uniform Random Timer
+
+### Useful Parameters
+
+* `Random Delay Maximum (in milliseconds):` maximum delay that can be randomly injected
+* `Constant Delay Offset (in milliseconds):` constant delay that is always injected
+
+`Total Delay = Random Delay + Constant Delay Offset`
+
+e.g. if `Random Delay Maximum` is 3000ms and `Constant Delay Offset` is 1000ms, the `Total Delay` will be between 1000ms and 4000ms.
+
