@@ -182,3 +182,24 @@ You can update the timer factor in config by changing this config variable: `tim
 
 e.g. if `Random Delay Maximum` is 3000ms and `Constant Delay Offset` is 1000ms, the `Total Delay` will be between 1000ms and 4000ms.
 
+## Throughput
+
+* JMeter tries to keep up the throughput
+* Throughput depends on available resources, timers and other elements
+* Do not change the throughput frequently
+* Shared algorithm is more accurate
+
+## Constant Throughput Timer
+
+* This timer introduces variable pauses, calculated to keep the total throughput (samples per minute) as close as possible to a given figure.
+
+* This throughput will be lower if the server isn't capable of handling it or if other timers or time-consuming test elements prevent it.
+
+* Although the Timer is called a Constant Throughput timer, the throughput value doesn't need to be constant - it can be defined in terms of a variable or function call and its value changed during a test.
+
+* The throughput value can be changes in various ways, including: -
+
+  * using a counter variable
+  * using a `__jexl3` or `__groovy` function to provide a changing value
+  * using the remote BeanShell server to change a JMeter property
+
