@@ -203,3 +203,41 @@ e.g. if `Random Delay Maximum` is 3000ms and `Constant Delay Offset` is 1000ms, 
   * using a `__jexl3` or `__groovy` function to provide a changing value
   * using the remote BeanShell server to change a JMeter property
 
+## Precise Throughput Timer
+
+* This timer introduces variable pauses, calculated to keep the total throughput (samples per minute) as close as possible to a given figure.
+
+* This throughput will be lower if the server isn't capable of handling it or if other timers or time-consuming test elements prevent it.
+
+* Although the Timer is called a Precise Throughput Timer, it doesn't aim to produce precisely the same number of samples over 1s intervals during testing.
+
+* The timer works best for rates under 36,000 requests/hour; however, mileage may vary!
+
+### Produced Schedule
+
+* `Precise Throughput Timer` models Poisson arrivals schedule, which often happens in real-life so is sensible for load testing.
+
+* Using this, samples are often naturally generated close together, so can reveal concurrency issues.  This is unlikely `Constant Throughput Timer`, which tends to produce samples at even intervals.
+
+### Ramp-up / Startup Spike
+
+* `Precise Throughput Timer` schedules executions in a random way to generate constant load, so don't need to configure ramp-up.  Instead, set `Ramp-up Period` and `Delay` to `0`.
+
+### Multiple Thread Groups Starting at the Same Time
+
+* When using `Precise Throughput Timer` across multiple threads, there's no need to add a "random" delay to each Thread Group to avoid ramp-up issues because `Precise Throughput Timer` schedules executions in a random way.
+
+### Number of Iterations per Hour
+
+* To satisfy business requirements of `N` samples per `M` minutes, map to these parameters as closely to the BRs as possible.  For example "60 samples per hour": -
+
+  * `Target throughput (samples):` `N`
+  * `Throughput period (seconds):` (`M` * 60)
+  * `Test duration (seconds):` [*desired testing time, e.g. `M` * 60*]
+
+* The first 2 options set the throughput, so `60/3600` could be `30/1800` or `15/900` or `1/60`, but it's best to match the business requirements as closely as possible for clarity.
+
+* Note: `Test duration (seconds)` does **not** limit test duration but is just used as a hint for the timer.  Configure the actual test in the `Thread Group` settings.
+
+## For more info, see [the documentation](https://jmeter.apache.org/usermanual/component_reference.html#Precise_Throughput_Timer)
+
