@@ -100,3 +100,42 @@ Useful parameters: -
 * `Default Value:` when no match found
 * `Namespaces aliases list (prefix=full namespace, 1 per line):` 
 * `Return entire XPath fragment instead of text content?` 
+
+## Inter-Thread Communication
+
+* enables communication between thread groups
+* FIFO queuing
+* this is a JMeter plugin (Inter-Thread Communication)
+
+### Elements
+
+* Inter-Thread Communication PostProcessor
+* Inter-Thread Communication PreProcessor
+
+Use these to capture a thread variable from one thread group and refer to it in another.
+
+e.g. capture a response variable from a HTTP request using the PostProcessor, retrieve this for use in another thread group using the PreProcessor.
+
+### Functions
+
+* `fifoPut` - put a value onto the queue
+* `fifoGet` - get a value from the queue (don't wait for data)
+* `fifoPop` - get and remove a string value from the queue (wait for data)
+* `fifoSize` - get the number of items in the queue
+
+Use `Tools -> Function Helper Dialog` to build up function calls, etc.
+
+Use the above functions to interact with queues, which are accessible to every thread group for inter-thread communication.
+
+### Functions vs. Plugins
+
+Functions
+
+* queues not cleared automatically
+* queues cleared with the first `fifoPut`
+* generates random queue name
+
+Plugins
+
+* clears queues at test start and stop
+
