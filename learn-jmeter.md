@@ -293,3 +293,28 @@ Here's a screenshot: -
 
 ![Precise Throughput Timer](images/Precise-Throughput-Timer.png)
 
+## Synchronizing Timer
+
+* The purpose of the Synchronizing Timer is to block threads until X number of threads have been blocked, then they can all be released at once.
+
+* Helps trigger N number of threads at the same time.
+
+* A Synchronizing Timer can thus create large instant loads at various points in the test plan.
+
+```c#
+if (NumSimultaneousUsersToGroupBy == 0) 
+{
+    numThreads = ThreadGroup.NumberOfThreads;
+}
+
+if (NumSimultaneousUsersToGroupBy < ThreadGroup.NumberOfThreads)
+{
+    // load will be split
+}
+
+if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
+{
+    // no execution
+}
+```
+
