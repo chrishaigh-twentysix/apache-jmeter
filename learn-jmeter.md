@@ -239,5 +239,57 @@ e.g. if `Random Delay Maximum` is 3000ms and `Constant Delay Offset` is 1000ms, 
 
 * Note: `Test duration (seconds)` does **not** limit test duration but is just used as a hint for the timer.  Configure the actual test in the `Thread Group` settings.
 
-## For more info, see [the documentation](https://jmeter.apache.org/usermanual/component_reference.html#Precise_Throughput_Timer)
+### Number of Threads and Think Times
+
+* You should only fiddle with think times and the number of threads to match business requirements, not to game the throughput
+
+* The `Precise Throughput Timer` enables setting a throughput goal and going for it, no matter how well an application performs, by creating a schedule at the test startup and using this to release threads.
+
+### Testing Low Rates and Repeatable Tests
+
+* When testing at low rates (e.g. 60/hour), you need to know the desired test profile, e.g.
+
+  * if load is injected at even intervals (every 60 seconds) then use a `Constant Throughput Timer`
+
+  * if simulating real users and requiring load at random intervals, use a `Precise Throughput Timer`
+
+* Change the `Random seed (change from 0 to random)` to control how repeatable the `Precise Throughput Timer` load test is - 0 will mean completely random load intervals each time, whereas a non-zero number should produce initially random but repeatable load intervals.
+
+* **Note**: beware when using multiple thread groups of timers with the same throughput rates and random seeds - might result in unwanted of simultaneous samples
+
+### Testing High Rates and/or Long Duration Tests
+
+* `Precise Throughput Timer` generates a schedule and keeps it in memory.
+
+* Most of the time this is fine; however, it's usually wise to keep the schedule shorter than 1M samples
+
+  * 1M samples would take ~200ms to generate a schedule for and would consume 8MB of the heap
+
+  * 10M samples would take 1-2s to generate a schedule for and would consume 80MB of the heap
+
+* For example, running a test at 5K samples/hour for 2 weeks would require 2*7*24*5000 = 1.68M samples
+
+### Bursty Load
+
+* Sometimes tests will need to happen in pairs, triples, etc., in which case a `Synchronizing Timer` should be used
+
+* `Precise Throughput Timer` has a native way to issue requests in packs using `Batched departures`: -
+
+  * `Number of threads in the batch (threads):` specifies the number of samples in a batch - this will still be in line with Target Throughput
+
+  * `Delay between threads in the batch (ms):` e.g. set to 42 with a batch size of 3 then the batches will depart at: -
+
+    1. `x`
+    2. `x + 42ms`
+    3. `x + 84ms`
+
+### Variable Load Rate
+
+* Although property values like throughput can be defined via expressions, it is recommended to keep this value more or less the same throughout the test because it takes time to recompute the new schedule to adapt to the new values.
+
+### Monitoring
+
+Here's a screenshot: -
+
+![Precise Throughput Timer](images/Precise-Throughput-Timer.png)
 
