@@ -318,3 +318,9 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 }
 ```
 
+## Listeners
+
+* Most of the `Listeners` perform several roles in addition to "listening" to the test results, including `View`, `Save` and `Read`.
+* Common file formats: `.xml`, `.csv`, `.jtl`
+* More listeners -> more memory
+* `Sample Data Writer` is an example of a memory efficient listener
