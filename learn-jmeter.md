@@ -324,3 +324,27 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 * Common file formats: `.xml`, `.csv`, `.jtl`
 * More listeners -> more memory
 * `Sample Data Writer` is an example of a memory efficient listener
+
+## IF Controller
+
+* This allows control of whether a test element's children are run or not.
+
+* By default, condition is evaluated only once initially, but can be configured to evaluate it on every runnable element within the controller.
+
+* By default (and best), check the `Interpret Condition as Variable Expression?` option, then in the condition field either: -
+
+  * Use a variable that contains `true` or `false`, e.g.
+
+    ```javascript
+    ${JMeterThread.last_sample_ok}
+    ```
+
+  * Use a function (`${__jexl3()}` is advised) to evaluate an expression that must return `true` or `false`, e.g.
+
+    ```javascript
+    ${__jexl3(${COUNT} < 10 && "${VAR}" == "abcd",)}
+    ```
+
+* Can also uncheck `Interpret Condition as Variable Expression?` and the `If Controller` will internally use javascript to evaluate the condition, which has a performance penalty which can be very big at scale.
+
+* If there is an error interpreting the code, the condition is assumed to be `false` and a message is logged in `jmeter.log`.
