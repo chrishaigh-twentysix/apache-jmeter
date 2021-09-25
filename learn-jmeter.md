@@ -370,3 +370,29 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
     ```
 
 * Can use `__jexl3` or `__groovy` functions, properties or variables within conditions.
+
+## Loop Controller
+
+* JMeter will loop through `Generative` or `Logic Controllers` within a `Loop Controller` a certain number of times - this is in addition to the loop value specified in the `Thread Group`.
+
+* For example, an `HTTP Request` sampler within a `Loop Controller` with a count of 2, within a `Thread Group` with a loop count of 3: a total of 2 * 3 = 6 HTTP Requests will be sent.
+
+* The loop index can be accessed via the following variable: -
+
+    ```java
+    __jm__<element name>__idx
+
+    // e.g. While Controller is named 'WC' so can access looping index via...
+    ${__jm__WC__idx}
+    ```
+
+## Transaction Controller
+
+* The `Transaction Controller` generates an additional sample which measures the overall time taken to perform the nested test elements.
+
+* There are two modes of operation: -
+
+  1. Additional sample is added after the nested samples
+  2. Additional sample is added as a parent of the nested samples
+
+* The generated sample time includes all the times for the nested samplers, excluding timers and processing time of pre/post processors by default, unless `Include duration of timer and pre-post processors in generated sample` is checked.
