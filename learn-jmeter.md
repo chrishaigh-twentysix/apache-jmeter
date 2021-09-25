@@ -411,3 +411,6 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 * Uses cases including A/B testing, chaos engineering and single/specific executions
 
+## Critical Section Controller
+
+* The `Critical Section Controller` ensures that its children will be executed by only one thread, using a named lock.
