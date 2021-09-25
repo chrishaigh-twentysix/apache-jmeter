@@ -348,3 +348,25 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 * Can also uncheck `Interpret Condition as Variable Expression?` and the `If Controller` will internally use javascript to evaluate the condition, which has a performance penalty which can be very big at scale.
 
 * If there is an error interpreting the code, the condition is assumed to be `false` and a message is logged in `jmeter.log`.
+
+## While Controller
+
+* The `While Controller` runs its children until the condition is `false`.
+* Possible conditional values are: -
+
+  * blank - exit loop if the last sample fails.  If any other samples fail but the last sample passes, then the loop will not exit.
+
+  * `LAST` - exit loop when last sample fails.  If the last sample fails before the loop, don't loop.
+
+  * Anything else (functions or variable) - exit the loop when the condition is effectively `false`.
+
+* JMeter exposes a looping index variable in the format: -
+
+    ```java
+    __jm__<element name>__idx
+
+    // e.g. While Controller is named 'WC' so can access looping index via...
+    ${__jm__WC__idx}
+    ```
+
+* Can use `__jexl3` or `__groovy` functions, properties or variables within conditions.
