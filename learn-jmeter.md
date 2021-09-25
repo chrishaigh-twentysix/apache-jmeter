@@ -397,3 +397,17 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 * The generated sample time includes all the times for the nested samplers, excluding timers and processing time of pre/post processors by default, unless `Include duration of timer and pre-post processors in generated sample` is checked.
 
+## Throughput Controller
+
+* The `Throughput Controller` allows the user to control how often its children are executed, relative to or irrespective of its parent `Thread Group`.  
+
+* There are 2 modes: -
+
+  1. `Percent executions` - execute a percentage of the iterations through the test plan
+
+  2. `Total executions` - stop executing after a number of executions have occurred.
+
+* Like the `Once Only Controller`, this setting is reset when a parent `Loop Controller` restarts.
+
+* Uses cases including A/B testing, chaos engineering and single/specific executions
+
