@@ -396,3 +396,4 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
   2. Additional sample is added as a parent of the nested samples
 
 * The generated sample time includes all the times for the nested samplers, excluding timers and processing time of pre/post processors by default, unless `Include duration of timer and pre-post processors in generated sample` is checked.
+
