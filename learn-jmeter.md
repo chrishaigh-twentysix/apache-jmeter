@@ -414,3 +414,23 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 ## Critical Section Controller
 
 * The `Critical Section Controller` ensures that its children will be executed by only one thread, using a named lock.
+
+## Module Controller
+
+* The `Module Controller` provides a mechanism for substituting test plan fragments into the current test plan at run-time.
+
+* A test plan fragment consists of a Controller and all the test elements (samplers, etc.) contained within it.  
+
+* The fragment can be located in any `Thread Group`.  If the fragment is inside a `Thread Group` then its controller can be disabled to prevent it being run, except by the Module Controller
+
+* Alternatively, store the fragments in a dummy, entirely disabled `Thread Group`.
+
+* The module controller can be used to easily switch between multiple test fragments, each with different sampler children, by simply choosing an appropriate controller in its drop down box.  This is convenient for running alternate test plans quickly and easily.
+
+* A fragment name is made up of the Controller name and all its parent names, e.g.
+
+  ```text
+  Test Plan / Protocol: JDBC / Control / Interleave Controller (Module1)
+  ```
+
+* Any fragments used by the `Module Controller` must have a unique name - the name is used to find the target controller when a test plan is reloaded.  Best practice is to rename the Controller name from the default to avoid accidental duplication.
