@@ -452,3 +452,14 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 * Use `Parameters` to pass in parameters to script
 
 * Use `File Name` to refer to script file instead of inline script.
+
+## Groovy
+
+* Groovy is an agile, dynamic programming language for the Java Virtual Machine.
+
+* Groovy includes features found in Python, Ruby and Smalltalk but uses syntax similar to the Java programming language.
+
+* JSR 241 - can be found [here](https://www.jcp.org/en/jsr/detail?id=241)
+
+* See also https://github.com/apache/groovy 
+
