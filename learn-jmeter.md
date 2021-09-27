@@ -483,3 +483,19 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 * get
 * put 
 
+### 4. SampleResult
+
+* pointer to the current SampleResult
+* various information returned from taking a sample of an entry
+
+### 5. Sampler
+
+* pointer to the current Sampler
+
+### 6. Log
+
+* Simple logging facade for Java
+
+### 7. Label
+
+* Sampler label name
