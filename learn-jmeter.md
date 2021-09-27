@@ -434,3 +434,22 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
   ```
 
 * Any fragments used by the `Module Controller` must have a unique name - the name is used to find the target controller when a test plan is reloaded.  Best practice is to rename the Controller name from the default to avoid accidental duplication.
+
+## JSR223 Sampler
+
+* The JSR223 Sampler allows JSR223 script code to perform a sample or some computation to create/update variables.
+
+* Java Specification Request 223 (AKA JSR223) can be found [here](https://www.jcp.org/en/jsr/detail?id=223)
+
+* This has been withdrawn since 2016 because Java 9 has its own internal scripting engine.
+
+* JSR223 Elements
+
+  1. JSR223 PreProcessor
+  2. JSR223 Sampler
+  3. JSR223 PostProcessor
+
+* Use `Parameters` to pass in parameters to script
+
+* Use `File Name` to refer to script file instead of inline script.
+
