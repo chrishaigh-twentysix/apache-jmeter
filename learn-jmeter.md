@@ -463,3 +463,23 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 * See also https://github.com/apache/groovy 
 
+## JSR223 Variables
+
+### 1. ctx
+
+* context for thread
+
+### 2. vars
+
+* variables
+* get
+* set
+* getObject
+* putObject
+
+### 3. props
+
+* properties
+* get
+* put 
+
