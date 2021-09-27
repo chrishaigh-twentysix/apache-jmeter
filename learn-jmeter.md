@@ -437,7 +437,7 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 ## JSR223 Sampler
 
-* The JSR223 Sampler allows JSR223 script code to perform a sample or some computation to create/update variables.
+* The `JSR223 Sampler` allows JSR223 script code to perform a sample or some computation to create/update variables.
 
 * Java Specification Request 223 (AKA JSR223) can be found [here](https://www.jcp.org/en/jsr/detail?id=223)
 
@@ -445,11 +445,10 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 * JSR223 Elements
 
-  1. JSR223 PreProcessor
-  2. JSR223 Sampler
-  3. JSR223 PostProcessor
+  1. `JSR223 PreProcessor`
+  2. `JSR223 Sampler`
+  3. `JSR223 PostProcessor`
 
 * Use `Parameters` to pass in parameters to script
 
 * Use `File Name` to refer to script file instead of inline script.
-
