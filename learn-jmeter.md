@@ -671,3 +671,65 @@ Dummy Sampler 2 Execution Order: -
 * Download to `lib/ext` subdirectory
 * Get `Plugins Manager` for easy management
 * Also search public repositories for plugins not published to `Plugins Manager`
+
+## Thread Group
+
+* A `Thread Group` defines a pool of users that will execute a particular test case
+* Use a `Thread Group` to configure the: -
+
+  * number of simulated users (threads)
+  * ramp up time (how long to start all threads)
+  * number of times to perform the test
+  * start and stop times for the test (optional)
+
+* When using the scheduler, JMeter runs the thread group until either: -
+  * the number of loops is reached
+  * the duration/end time is reached
+
+* The above end condition is only checked between samples but when it is reached, its thread will stop.
+
+* JMeter won't interrupt samplers waiting for a response
+
+* Run a selection of `Thread Groups` from the GUI by multi-selecting them and right-clicking to choose one of three options: -
+
+  1. `Start` - start selected `Thread Groups`
+  2. `Start no pauses` - start selected `Thread Groups` without running timers
+  3. `Validate` - start selected `Thread Groups` using `Validation Mode`
+
+### Validation Mode
+
+* This enables rapid validation of a `Thread Group` by running it with: -
+
+  * 1 thread
+  * 1 iteration
+  * 0 timers
+  * a `Startup delay` of `0`
+
+* The above defaults can be modified in `user.properties`
+
+### Ramp-up Period
+
+* This setting is how long JMeter should take to get all of the threads started.
+
+* If there are `10` threads and the ramp-up time is set to `100` seconds, then each thread will begin `100 / 10 = 10` seconds after the previous thread started.
+
+* The first thread will always start directly (so a single-threaded `Thread Group` effectively ignores its `Startup delay` setting), so the tenth thread in the above example will actually start after 90 seconds, not 100.
+
+## Load Testing
+
+* Load testing helps you to study the application behaviour under defined load.
+
+* Use JMeter in CLI mode to execute load tests: -
+
+  ```bash
+  # shorthand
+  jmeter -n -t [jmx file] -l [results file] -e -o [Path to web report folder]
+
+  # longhand
+  jmeter \
+    --nongui \
+    --testfile [jmx file] \
+    --logfile [results file] \
+    --reportatendofloadtests \
+    --reportoutputfolder [Path to web report folder]
+  ```
