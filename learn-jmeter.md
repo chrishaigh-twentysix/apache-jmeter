@@ -499,3 +499,20 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 ### 7. Label
 
 * Sampler label name
+
+### 8. File Name
+
+* supply a script file rather than inline scripts.
+
+### 9. Parameters
+
+* use to pass data to JSR223 scripts as a map/hashtable of parameters
+
+### 10. Args
+
+* use to pass data to JSR223 scripts as an array
+
+### 11. OUT
+
+* shorthand for `System.out`.
+
