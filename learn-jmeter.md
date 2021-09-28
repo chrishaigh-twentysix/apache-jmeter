@@ -664,3 +664,10 @@ Dummy Sampler 2 Execution Order: -
 * Ordered
   * Controllers
   * Samplers
+
+## JMeter Plugins
+
+* Extend the functionality of JMeter
+* Download to `lib/ext` subdirectory
+* Get `Plugins Manager` for easy management
+* Also search public repositories for plugins not published to `Plugins Manager`
