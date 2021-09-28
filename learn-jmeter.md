@@ -733,3 +733,38 @@ Dummy Sampler 2 Execution Order: -
     --reportatendofloadtests \
     --reportoutputfolder [Path to web report folder]
   ```
+
+## Reading from a Properties File
+
+* Reading from a Properties File helps to automate and integrate with a CI/CD pipeline and increase flexibility
+
+* Load this Properties File into a project using command line argument: -
+
+  ```bash
+  # shorthand
+  jmeter -q [additional property file(s)]
+
+  # longhand
+  jmeter --addprop [additional property file(s)]
+  ```
+
+* Example `test.properties` file: -
+
+  ```properties
+  numberofthreads=10
+  url=example.com
+  protocol=https
+  testduration=30
+  loop=50
+  ```
+
+* This can be applied to a consuming JMeter project using: -
+
+  ```bash
+
+  jmeter \
+    --nongui \
+    --testfile Read-from-Properties-Demo.jmx \
+    --logfile Read-from-Properties-Demo.jtl \
+    --addprop test.properties
+  ```
