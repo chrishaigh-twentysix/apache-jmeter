@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - File I/O" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">File file = new File (&quot;demo.txt&quot;)
+
+// create
+file.createNewFile()
+
+// read
+def lines = file.readLines()
+println lines
+
+def content = &quot;This is my new content.\n&quot;
+
+// write
+file &lt;&lt; content
+
+def newLines = file.readLines()
+println newLines
+
+// delete
+file.delete()</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler - JSON" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+  
+def jsonSlurper = new JsonSlurper()
+def json = &apos;&apos;&apos;
+{
+  &quot;firstName&quot;: &quot;John&quot;,
+  &quot;lastName&quot;: &quot;Doe&quot;,
+  &quot;age&quot;: 26,
+  &quot;address&quot;: {
+    &quot;streetAddress&quot;: &quot;Naist Street&quot;,
+    &quot;city&quot;: &quot;Nara&quot;,
+    &quot;postalCode&quot;: &quot;630-0192&quot;,
+  },
+  &quot;phoneNumbers&quot;: [
+    {
+      &quot;type&quot;: &quot;iPhone&quot;,
+      &quot;number&quot;: &quot;0123-4567-8888&quot;,
+    },
+    {
+      &quot;type&quot;: &quot;home&quot;,
+      &quot;number&quot;: &quot;0123-4567-8910&quot;,
+    }
+  ]
+}
+&apos;&apos;&apos;
+println &apos;*************************************************&apos;
+
+def obj = jsonSlurper.parseText(json)
+
+println &quot;First Name: ${obj.firstName}&quot;
+println &quot;Last Name: ${obj.lastName}&quot;
+println &quot;Phone Numbers found: ${obj.phoneNumbers.size()}&quot; 
+
+// address
+def address = obj.address
+
+address.each { 
+  line -&gt; line.each { 
+    println &quot;${line.key}: ${line.value}&quot;
+  } 
+}
+
+// all phone numbers
+def phoneNumbers = obj.phoneNumbers
+
+phoneNumbers.each { 
+  phoneNumber -&gt; phoneNumber.each { 
+    type, number -&gt; println &quot;${type}: ${number}&quot; 
+  } 
+}
+
+println &apos;*************************************************&apos;</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

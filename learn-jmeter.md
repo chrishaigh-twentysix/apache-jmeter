@@ -516,3 +516,89 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
 * shorthand for `System.out`.
 
+## File I/O in Groovy
+
+* Open, read, write and manipulate files, e.g.
+
+  ```groovy
+  File file = new File ("demo.txt")
+
+  // create
+  file.createNewFile()
+
+  // read
+  def lines = file.readLines()
+  println lines
+
+  def content = "This is my new content.\n"
+
+  // write
+  file << content
+
+  def newLines = file.readLines()
+  println newLines
+
+  // delete
+  file.delete()
+  ```
+
+## JSON in Groovy
+
+* Use `JsonSlurper` to parse JSON
+* Use "closures" to iterate objects/arrays (similar to Lambda), e.g.
+
+  ```groovy
+  import groovy.json.JsonOutput
+  import groovy.json.JsonSlurper
+  
+  def jsonSlurper = new JsonSlurper()
+  def json = '''
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 26,
+    "address": {
+      "streetAddress": "Naist Street",
+      "city": "Nara",
+      "postalCode": "630-0192",
+    },
+    "phoneNumbers": [
+      {
+        "type": "iPhone",
+        "number": "0123-4567-8888",
+      },
+      {
+        "type": "home",
+        "number": "0123-4567-8910",
+      }
+    ]
+  }
+  '''
+  println '*************************************************'
+
+  def obj = jsonSlurper.parseText(json)
+
+  println "First Name: ${obj.firstName}"
+  println "Last Name: ${obj.lastName}"
+  println "Phone Numbers found: ${obj.phoneNumbers.size()}" 
+
+  // address
+  def address = obj.address
+
+  address.each { 
+    line -> line.each { 
+      println "${line.key}: ${line.value}"
+    } 
+  }
+
+  // all phone numbers
+  def phoneNumbers = obj.phoneNumbers
+
+  phoneNumbers.each { 
+    phoneNumber -> phoneNumber.each { 
+      type, number -> println "${type}: ${number}" 
+    } 
+  }
+
+  println '*************************************************'
+  ```
