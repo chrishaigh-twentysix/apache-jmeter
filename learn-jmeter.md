@@ -602,3 +602,65 @@ if (NumSimultaneousUsersToGroupBy > ThreadGroup.NumberOfThreads)
 
   println '*************************************************'
   ```
+
+## Execution Order & Scoping RUles
+
+### JMeter Execution Order
+
+1. **C**`onfiguration` elements
+2. **P**`re-Processors`
+3. **T**`imers`
+4. **S**`amplers`
+5. **P**`ost-Processors` (unless `SampleResult` is `null`)
+6. **A**`ssertions` (unless `SampleResult` is `null`)
+7. **L**`isteners` (unless `SampleResult` is `null`)
+
+## ^^ **C**`onf` **P**oin**TS** **PAL** ^^
+
+* `Timers`, `Assertions`, `Pre-Processors` and `Post-Processors` are only processed if there is a sampler
+* `Logic Controllers` and `Samplers` execute in the order that they appear
+* Other elements execute as per the scope
+
+For example
+
+* `Test Plan`
+  * `Thread Group`
+    * `HTTP Header Manager`
+    * `Constant Timer`
+    * `jp@gc - Dummy Sampler 1`
+      * `jp@gc - JSR223 PostProcessor`
+    * `jp@gc - Dummy Sampler 2`
+      * `jp@gc - JSR223 PostProcessor`
+    * `View Results Tree`
+
+Remembering **Conf** **P**oin**TS** **PAL**
+
+Dummy Sampler 1 Execution Order: -
+
+1. `HTTP Header Manager`
+2. `Constant Timer`
+3. `Dummy Sampler 1`
+4. `Post Processor`
+5. `View Results Tree`
+
+Dummy Sampler 2 Execution Order: -
+
+1. `HTTP Header Manager`
+2. `Pre Processor`
+3. `Constant Timer`
+4. `Dummy Sampler 2`
+5. `View Results Tree`
+
+### Scoping Rules
+
+* Heirarchical
+  * Listeners
+  * Config Elements
+  * Post-Processors
+  * Pre-Processors
+  * Assertions
+  * Timers
+
+* Ordered
+  * Controllers
+  * Samplers
