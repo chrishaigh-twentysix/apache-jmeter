@@ -825,3 +825,36 @@ See https://github.com/undera/perfmon-agent
       ```
 
   * Test connectivity by Validating the Test Plan
+
+## Running JMeter on Docker
+
+### Docker Commands
+
+```powershell
+# pull docker image
+docker pull justb4/jmeter
+
+# tag as meaningful name
+docker tag justb4/jmeter jmeter
+
+# now both aliases appear in docker images
+docker images
+<#
+
+  REPOSITORY                         TAG       IMAGE ID       CREATED        SIZE
+  docker/getting-started             latest    083d7564d904   3 months ago   28MB
+  jmeter                             latest    62f762a118ed   4 months ago   238MB
+  justb4/jmeter                      latest    62f762a118ed   4 months ago   238MB
+  hongviet119/perfmon-server-agent   2.2.3     c27351d5ab9d   2 years ago    283MB
+
+#>
+
+# run JMeter in Docker on example Test Plan
+docker run jmeter `
+  --nongui `
+  --testfile bin/examples/CSVSample.jmx `
+  --logfile bin/examples/Run1.jtl
+
+```
+
+* The above solution isn't great because it creates local results files - better to use `--mount` flag to map a specific folder to the container.
