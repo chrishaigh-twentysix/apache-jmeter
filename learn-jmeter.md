@@ -761,7 +761,6 @@ Dummy Sampler 2 Execution Order: -
 * This can be applied to a consuming JMeter project using: -
 
   ```bash
-
   jmeter \
     --nongui \
     --testfile Read-from-Properties-Demo.jmx \
