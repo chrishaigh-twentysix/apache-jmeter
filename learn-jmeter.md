@@ -767,3 +767,61 @@ Dummy Sampler 2 Execution Order: -
     --logfile Read-from-Properties-Demo.jtl \
     --addprop test.properties
   ```
+
+## Server Performance Monitoring
+
+* It is critical to monitor the performance of the servers being tested.
+
+* Many metrics can be monitored, for example: -
+
+  * CPU
+  * Memory
+  * Network
+  * Disk
+  * Swap
+
+### PerfMon Server Agent
+
+See https://github.com/undera/perfmon-agent
+
+* This is a JMeter agent, written in Java, so executable on Windows or Linux platforms.
+
+* Collects and sends back server telemetry over port 4444 (default)
+
+* Usage: -
+
+  * Windows
+
+    ```powershell
+    ./startAgent.bat
+    ```
+
+  * Linux
+
+    ```bash
+    ./startAgent.sh
+    ```
+
+* Installation
+
+  * Download and install **PerfMon Metrics Collector** JMeter plugin
+  * Add `jp@gc - PerfMon Metrics Collector` Listener to Test Plan
+  * Configure servers to monitor, port (`4444` by default), metrics to collect, etc.
+
+* Testing
+  * Start the `PerfMon Server Agent` on the target server
+    * locally using `startAgent.bat`, etc.
+
+    or
+
+    * using docker, e.g.
+
+      ```powershell
+      docker run `
+        --detach `
+        --publish 4444:4444 `
+        --name perfmon-agent `
+        hongviet119/perfmon-server-agent
+      ```
+
+  * Test connectivity by Validating the Test Plan
