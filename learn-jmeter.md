@@ -1051,3 +1051,16 @@ Specify the Treads Schedule to design a custom test schedule by defining each te
 * new requests are triggered by the completion of a previous request
 * queuing mechanism often implemented to prevent the system from being overwhelmed
 * when testing, define the concurrency rate (e.g. 20 threads)
+
+## BeanShell Server
+
+* Can run a BSH server locally and invoke commands on it to affect runtime variables on the fly.
+
+* For example, reduce the timer precision from 1000 to 10 (increase throughput) during a running load test: -
+
+  ```powershell
+  # reduce timer precision to increase throughput during running test
+  java -jar ..\lib\bshclient.jar localhost 9000 ..\extras\update.bsh 10
+  ```
+
+* *NB: the number of threads cannot be changed by a BSH server*
