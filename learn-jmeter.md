@@ -1003,3 +1003,38 @@ jmeter \
     ```
 
   * You can now add new utility functions to this file.
+
+## Workload Models
+
+* Distribution of transactions
+
+* Simulating the workload helps to understand how a system works
+
+* There are 2 types of workload model: Open and Closed
+
+### Open Workload Model
+
+* most websites operate with this model
+* allow everyone access all the time
+* new requests arrive independently of completions (e.g. according to stochastic process or fixed trace)
+* increased load gradually degrades system performance and eventually overwhelms it
+* when testing, define the arrival rate
+* Use `bzm - Arrivals Thread Group` / `gp@gc - Active Threads Over Time`
+
+#### Arrivals Thread Group
+
+Specify key values including: -
+
+* Target Rate (arrivals/sec):
+* Ramp-up Time (sec):
+* Ramp-up Steps Count:
+* Hold Target Rate Time (sec):
+
+Specifying the above will allow the Arrivals Thread Group to design a load test schedule to meet this criteria.
+
+### Closed Workload Model
+
+* many ticketing websites operate with this model to ensure a steady stream of sales and consistent experience during busy periods
+* new requests are triggered by the completion of a previous request
+* queuing mechanism often implemented to prevent the system from being overwhelmed
+* when testing, define the concurrency rate (e.g. 20 threads)
