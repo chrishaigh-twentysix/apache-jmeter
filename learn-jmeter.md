@@ -1023,14 +1023,27 @@ jmeter \
 
 #### Arrivals Thread Group
 
-Specify key values including: -
+Specify key parameters including: -
 
-* Target Rate (arrivals/sec):
-* Ramp-up Time (sec):
-* Ramp-up Steps Count:
-* Hold Target Rate Time (sec):
+* `Target Rate (arrivals/sec):`
+* `Ramp-up Time (sec):`
+* `Ramp-up Steps Count:`
+* `Hold Target Rate Time (sec):`
+
+* `Concurrency Limit`: limit the number of threads available to the test
 
 Specifying the above will allow the Arrivals Thread Group to design a load test schedule to meet this criteria.
+
+#### Free-Form Arrivals Thread Group
+
+Specify the Treads Schedule to design a custom test schedule by defining each test phase, its intensity and duration via the following key parameters: -
+
+* `Start Value`
+* `End Value`
+* `Duration`
+
+* Thread Iterations Limit: 
+* `Concurrency Limit`: limit the number of threads available to the test
 
 ### Closed Workload Model
 
