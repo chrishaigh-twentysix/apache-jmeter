@@ -858,3 +858,104 @@ docker run jmeter `
 ```
 
 * The above solution isn't great because it creates local results files - better to use `--mount` flag to map a specific folder to the container.
+
+## Remote Distributed Testing in JMeter
+
+* Needed for testing high loads - e.g. it would be impossible to run 10,000 threads from a single machine, so need to distribute the workload
+
+* Topology is master JMeter controller, sending commands to and receiving results from, JMeter workers, effectively distributing the workload
+
+### Configuration Steps
+
+1. Configure Worker Nodes
+2. Configure Master Node
+3. Start the test
+
+### Important Considerations
+
+1. `SSL Setup` - by default this is enabled for this configuration
+2. `Same subnet` - master and workers must be on same network subnet
+3. `Identical Java/JMeter versions` - across master and workers
+
+### Check Versions
+
+```powershell
+java -version
+jmeter --version
+```
+
+### Configure Remote Hosts
+
+```properties
+# %JMETER_HOME%/bin/jmeter.properties
+
+# Add remote hosts (workers) - e.g. my local docker instance of jmeter-server
+remote_hosts=127.0.0.1:10990
+
+# Disable SSL for RMI if testing over HTTP
+server.rmi.ssl.disable=true
+```
+
+### Run jmeter-server in Docker container
+
+```powershell
+docker run `
+  --detach `
+  --publish 10990:10990 `
+  --publish 10991:10991 `
+  --publish 10992:10992 `
+  --env JVM_ARGS="-Djava.rmi.server.hostname=192.168.1.77" `
+  --env HEAP="-XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=75 -XX:MetaspaceSize=96m -XX:MaxMetaspaceSize=256m" `
+  --env RUN_IN_DOCKER="-XX:+UnlockExperimentalVMOptions -XX:+UseContainerSupport" `
+  mansy0/jmeter-server  
+```
+
+(can also omit the `--detach` flag or re-attach to container using `docker attach` to see its logs in real time.)
+
+### Run a JMeter test remotely
+
+* In the GUI, `Run -> Remote Start -> [remote server]`
+
+### Considerations
+
+* `Thread Group -> Number of Threads (users):` setting applies to **all** remote hosts - it's not divided across all hosts, so any sharing calculation must be done manually.
+
+### Using SSL
+
+* Config values to pay attention to: -
+
+  ```properties
+  # jmeter.properties
+
+  # Key alias
+  server.rmi.ssl.keystore.alias=rmi
+
+  # Password of keystore
+  server.rmi.ssl.keystore.password=changeit
+  ```
+
+* Create RMI Key Store
+
+  ```powershell
+  # edit this file to change alias and password
+  & "%JMETER_HOME%\bin\create-rmi-keystore.bat"
+  ```
+
+  This creates a file - `rmi_keystore.jks` - in the `bin\` directory.  Make sure it is copied to all remote hosts for SSL connectivity.
+
+* Copy Key Store to remote hosts
+
+  ```powershell
+  docker cp `
+    "$env:JMETER_HOME\bin\rmi_keystore.jks" `
+    "b3e6d158e32c:/usr/local/jmeter/bin/rmi_keystore.jks"
+  ```
+
+* Re-enable SSL on ALL hosts
+
+  ```properties
+  # %JMETER_HOME%/bin/jmeter.properties
+  
+  # Re-enable SSL for RMI
+  server.rmi.ssl.disable=false
+  ```
