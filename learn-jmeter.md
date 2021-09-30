@@ -959,3 +959,17 @@ docker run `
   # Re-enable SSL for RMI
   server.rmi.ssl.disable=false
   ```
+
+### Run Distributed Testing without GUI
+
+```bash
+# shorthand
+jmeter -n -t <JMX file> -l <JTL file> -R <remote host>
+
+# longhand
+jmeter \
+  --nongui \
+  --testfile <JMX file> \
+  --logfile <JTL file> \
+  --remotestart <remote host>
+```
