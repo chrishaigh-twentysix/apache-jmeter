@@ -973,3 +973,33 @@ jmeter \
   --logfile <JTL file> \
   --remotestart <remote host>
 ```
+
+## Writing Your Own Groovy Functions
+
+* JMeter has a built-in `__groovy` function to evaluate expressions, e.g.
+
+  ```java
+  ${__groovy(1+2,)}
+  ```
+
+* You can also write your own Groovy snippets, e.g.
+
+  ```java
+  ${__groovy(square(5),)}
+  ```
+
+* Set the `groovy.utilities` property to the path of your Groovy script file containing utility functions (`bin/utility.groovy` by default) via either: -
+
+  * In `user.properties` (recommended)
+  * In `jmeter.properties`
+  * At the command line: -
+
+    ```powershell
+    # shorthand
+    jmeter -Jgroovy.utilities=utility.groovy
+
+    # longhand
+    jmeter --jmeterproperty "groovy.utilities=utility.groovy"
+    ```
+
+  * You can now add new utility functions to this file.
