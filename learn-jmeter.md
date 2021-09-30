@@ -1063,7 +1063,13 @@ Specify the number of concurrent threads, ramp-up and hold at target rate time, 
 
 #### Ultimate Thread Group
 
+Specify a symmetrical startup and shutdown schedule based on the number of threads and the amount of time taken to startup, hold and shutdown, specifying key parameters including: -
 
+* `Start Threads Count`
+* `Initial Delay, sec`
+* `Startup Time, sec`
+* `Hold Load For, sec`
+* `Shutdown Time`
 
 ## BeanShell Server
 
