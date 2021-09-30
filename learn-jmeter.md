@@ -1036,7 +1036,7 @@ Specifying the above will allow the Arrivals Thread Group to design a load test 
 
 #### Free-Form Arrivals Thread Group
 
-Specify the Treads Schedule to design a custom test schedule by defining each test phase, its intensity and duration via the following key parameters: -
+Specify the Threads Schedule to design a custom test schedule by defining each test phase, its intensity and duration via the following key parameters: -
 
 * `Start Value`
 * `End Value`
@@ -1051,6 +1051,19 @@ Specify the Treads Schedule to design a custom test schedule by defining each te
 * new requests are triggered by the completion of a previous request
 * queuing mechanism often implemented to prevent the system from being overwhelmed
 * when testing, define the concurrency rate (e.g. 20 threads)
+
+#### Concurrent Threads Thread Group
+
+Specify the number of concurrent threads, ramp-up and hold at target rate time, then let the Thread Group design a schedule to achieve this, specifying the following key parameters: -
+
+* `Target Concurrency:`
+* `Ramp-up Time (sec):`
+* `Ramp-up Steps Count:`
+* `Hold Target Rate Time (sec):`
+
+#### Ultimate Thread Group
+
+
 
 ## BeanShell Server
 
