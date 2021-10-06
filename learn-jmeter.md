@@ -1083,3 +1083,29 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
   ```
 
 * *NB: the number of threads cannot be changed by a BSH server*
+
+## Flow Control Actions versus Timers
+
+* Can use `Add Think Time` or `Timers` to insert delays between `Samplers` depending on business requirements and test writing style
+
+* Remember that `Timers` take precedence
+
+### Flow Control Action
+
+* The `Flow Control Action` sampler is intended for use in a conditional controller
+
+* Rather than generate a sample, the test element either pauses or stops the selected target.
+
+* Useful in conjunction with the `Transaction Controller` because it allows pauses to be included without needing to generate a sample
+
+* Actions
+
+  * `Pause` - pause the current thread or test
+
+  * `Stop` - stop the thread or test after completing any samples in progress
+
+  * `Stop Now` - stop the test without waiting for samples to complete, interrupting any active samples
+
+  * `Go to next loop iteration` - effectively a `continue`
+
+  * Adding `Think Times` to `Thread Group` children allows fixed duration (set in `Flow Control Action`) and random delays (set in child `Uniform Random Timer`) as needed
