@@ -1122,7 +1122,6 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
 3. Trigger it
 
 ```yaml
-
 - name: JMeter Test
   uses: QAInsights/PerfAction@2.0
   with:
@@ -1134,5 +1133,4 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
   with:
     name: jmeter-results
     path: result.jtl
-
 ```
