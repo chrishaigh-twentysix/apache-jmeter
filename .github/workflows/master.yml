@@ -31,7 +31,7 @@ jobs:
         uses: QAInsights/PerfAction@2.0
         with:
           # jmeter test plan to execute
-          test-plan-path: ./Example.jmx
+          test-plan-path: ./Example-Demo.jmx
           # Optional arguments. For more details https://jmeter.apache.org/usermanual/get-started.html#non_gui
           # args: # optional
 
