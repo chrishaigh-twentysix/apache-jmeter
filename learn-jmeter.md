@@ -1109,3 +1109,30 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
   * `Go to next loop iteration` - effectively a `continue`
 
   * Adding `Think Times` to `Thread Group` children allows fixed duration (set in `Flow Control Action`) and random delays (set in child `Uniform Random Timer`) as needed
+
+## Run JMeter in GitHub Actions
+
+* Use `PerfAction` GitHub Action to help automate performance testing using JMeter and its plugins
+* https://github.com/marketplace/actions/perfaction-for-jmeter
+
+### Setup Steps
+
+1. Create a repo
+2. Add an action
+3. Trigger it
+
+```yaml
+
+- name: JMeter Test
+  uses: QAInsights/PerfAction@2.0
+  with:
+    test-plan-path: ./TestPlans/S01_SimpleExample/S01_SimpleExample.jmx
+    args: ""
+
+- name: Upload Results
+  uses: actions/upload-artifacts@v2
+  with:
+    name: jmeter-results
+    path: result.jtl
+
+```
