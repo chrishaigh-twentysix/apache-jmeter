@@ -1134,3 +1134,55 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
     name: jmeter-results
     path: result.jtl
 ```
+
+## Listeners of Interest
+
+### Summary Report
+
+* The `Summary Report` creates a table row for each differently named request in a test - similar to the `Aggregate Report` but uses less memory.
+
+* Throughput is calculated from the point of view of the sampler target (e.g. the remote server when HTTP samples).
+
+* JMeter takes into account the total time over which the requests have been generated - if other samplers and timers are in the same thread, they will increase the total time and reduce the throughput value.
+
+* 2 identical samplers with different names will have half the throughput of 2 samplers of the same name, so it's important to choose sampler labels carefully to get the best report results
+
+* Fields
+
+  * `Label` - label of the sample
+  * `# Samples` - number of samples of this label generated during the test
+  * `Average` - average elapsed time (ms) of a set of results
+  * `Min` - shortest elapsed time (ms) for a sample to be run
+  * `Max` - longest elapsed time (ms) for a sample to be run
+  * `Std. Dev.` - the Standard Deviation of the sample's elapsed time
+  * `Error %` - % of requests with errors
+  * `Throughput` - requests per second/minute/hour - the time unit is chosen so that the displayed rate is at least 1.0.
+    * **NB: When throughput is saved to a CSV file, it's expressed in requests/second**
+
+  * `Received KB/sec` - data received in kilobytes per second
+  * `Sent KB/sec` - data sent in kilobytes per second
+  * `Avg. Bytes` - average sample response size in bytes
+
+### Aggregate Report
+
+* The `Aggregate Report` creates a table row for each differently named request in a test.
+
+* Similar to `Summary Report` but also calculates `Median`, `90% Line`, `95% Line` and `99% Line`, and uses more memory in doing so
+
+* Fields
+  * `Label` - label of the sample
+  * `# Samples` - number of samples of this label generated during the test
+  * `Average` - average elapsed time (ms) of a set of results
+  * `Median` - the median time of a ret of results
+  * `90% Line` - 90% of the samples took *no longer* than this time
+  * `95% Line` - 95% of the samples took no longer than this time
+  * `99% Line` - 99% of the samples took no longer than this time
+  * `Min` - shortest elapsed time (ms) for a sample to be run
+  * `Max` - longest elapsed time (ms) for a sample to be run
+  * `Std. Dev.` - the Standard Deviation of the sample's elapsed time
+  * `Error %` - % of requests with errors
+  * `Throughput` - requests per second/minute/hour - the time unit is chosen so that the displayed rate is at least 1.0.
+    * **NB: When throughput is saved to a CSV file, it's expressed in requests/second**
+
+  * `Received KB/sec` - data received in kilobytes per second
+  * `Sent KB/sec` - data sent in kilobytes per second
