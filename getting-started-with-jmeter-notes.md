@@ -136,11 +136,14 @@ Firefox is the recommended browser for this
 
 Firefox
 
-- about:preferences
-- Network Settings
-- Manual proxy configuration -> HTTP Proxy: (ip of local machine) Port: 8888 [x] Use this proxy server for all protocols
+* about:preferences
+* `Network Settings`
+* `Manual proxy configuration` -> 
+  * `HTTP Proxy:` (ip of local machine) 
+  * `Port:` 8888 
+  * `[x] Use this proxy server for all protocols`
 
-- NB: localhost proxies are now disabled in Firefox (unless overridden, which is not recommended!)
+* NB: localhost proxies are now disabled in Firefox (unless overridden, which is not recommended!)
 
 Chrome
 
