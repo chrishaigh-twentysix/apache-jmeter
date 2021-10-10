@@ -1186,3 +1186,23 @@ Specify a symmetrical startup and shutdown schedule based on the number of threa
 
   * `Received KB/sec` - data received in kilobytes per second
   * `Sent KB/sec` - data sent in kilobytes per second
+
+  ### Graph Results
+
+  * **DON'T USE GRAPH RESULTS DURING LOAD TESTS - IT CONSUMES A LOT OF MEMORY AND CPU RESOURCES - USE ONLY FOR FUNCTIONAL TESTING OR WHILST DEBUGGING/VALIDATING TEST PLANS**
+
+  * The Graph Results listener generates a simple graph that plots all sample times, including: -
+
+    * `Data` (black)
+    * `Average` (blue)
+    * `Median` (purple)
+    * `Deviation` (red)
+    * `Throughput` (green)
+
+  * `Throughput` represents the actual number of requests/minute handled by the server
+
+    * This calculation includes any inserted delays and JMeter's own internal processing time.
+
+    * This number represents something real (how many requests per minute were actually handled by the server)
+
+    * Increase number of threads and/or decrease the delays to discover a server's maximum throughput
